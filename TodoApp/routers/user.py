@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException, Path
 from starlette import status
 
-from Services.auth_service import password_context
+from services.auth_service import password_context
 from dependencies import db_dependency
 from dtos.user_dto import  UserCreateDto, UserResponseDto, UserUpdateDto
 from entities.user import User

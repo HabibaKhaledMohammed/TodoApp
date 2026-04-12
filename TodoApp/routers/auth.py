@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
 
-from Services.auth_service import (
+from services.auth_service import (
     authenticate_user,
     create_access_token,
     get_current_user as resolve_current_user,

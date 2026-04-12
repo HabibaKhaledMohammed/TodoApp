@@ -1,0 +1,4 @@
+alembic init alembic --> then set the sqlite connection in alembic.ini and set the base in env.py
+alembic revision -m "create phone number for user" --> then set the upgrade and downgrade function
+alembic upgrade 97835dbf8fea
+alembic downgrade -1
