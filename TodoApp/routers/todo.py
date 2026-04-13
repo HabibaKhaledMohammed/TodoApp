@@ -1,10 +1,10 @@
 
 from fastapi import APIRouter, Path, HTTPException
-from dtos.todo_dto import TodoDto
-from entities.todo import Todo
-from dependencies import db_dependency, user_dependency
+from ..dtos.todo_dto import TodoDto
+from ..entities.todo import Todo
+from ..dependencies import db_dependency, user_dependency
 
-router = APIRouter()
+router = APIRouter(prefix="/todos", tags=["todos"])
 
 @router.get("/")
 async def read_all(db: db_dependency, user: user_dependency):
@@ -15,7 +15,7 @@ async def read_all(db: db_dependency, user: user_dependency):
     raise HTTPException(status_code=401, detail="Authentication credentials were not provided")
 
 
-@router.get("/todos/{todo_id}", response_model=TodoDto)
+@router.get("/{todo_id}", response_model=TodoDto)
 def get_todo_by_id(
         db: db_dependency,
         user: user_dependency,
@@ -27,7 +27,7 @@ def get_todo_by_id(
 
     return todo
 
-@router.post("/todos", response_model=TodoDto, status_code=201)
+@router.post("/", response_model=TodoDto, status_code=201)
 def create_todo(todo: TodoDto, db: db_dependency, user:user_dependency):
     if user is None:
         raise HTTPException(status_code=404, detail="Authentication Failed")
@@ -44,7 +44,7 @@ def create_todo(todo: TodoDto, db: db_dependency, user:user_dependency):
     return new_todo
 
 
-@router.put("/todos/{todo_id}", response_model=TodoDto)
+@router.put("/{todo_id}", response_model=TodoDto)
 def replace_todo(
     todo: TodoDto,
     db: db_dependency,
@@ -64,7 +64,7 @@ def replace_todo(
     return existing_todo
 
 
-@router.patch("/todos/{todo_id}", response_model=TodoDto)
+@router.patch("/{todo_id}", response_model=TodoDto)
 def update_todo(
     todo: TodoDto,
     db: db_dependency,
@@ -84,7 +84,7 @@ def update_todo(
     return existing_todo
 
 
-@router.delete("/todos/{todo_id}")
+@router.delete("/{todo_id}")
 def delete_todo(
     db: db_dependency,
     user: user_dependency,

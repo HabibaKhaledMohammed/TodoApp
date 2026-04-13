@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from fastapi.security import OAuth2PasswordRequestForm
 from starlette import status
 
-from services.auth_service import (
+from ..services.auth_service import (
     authenticate_user,
     create_access_token,
     get_current_user as resolve_current_user,
@@ -11,9 +11,9 @@ from services.auth_service import (
     password_context,
     verify_password,
 )
-from dependencies import db_dependency, user_dependency
-from dtos.auth_dto import ChangePasswordDto, LoginDto, TokenDto
-from entities.user import User
+from ..dependencies import db_dependency, user_dependency
+from ..dtos.auth_dto import ChangePasswordDto, LoginDto, TokenDto
+from ..entities.user import User
 
 router = APIRouter(prefix='/auth', tags=['auth'])
 

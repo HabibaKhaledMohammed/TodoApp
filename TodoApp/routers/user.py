@@ -1,10 +1,10 @@
 from fastapi import APIRouter, HTTPException, Path
 from starlette import status
 
-from services.auth_service import password_context
-from dependencies import db_dependency
-from dtos.user_dto import  UserCreateDto, UserResponseDto, UserUpdateDto
-from entities.user import User
+from ..services.auth_service import password_context
+from ..dependencies import db_dependency
+from ..dtos.user_dto import  UserCreateDto, UserResponseDto, UserUpdateDto
+from ..entities.user import User
 
 
 router = APIRouter(prefix='/users', tags=['users'])

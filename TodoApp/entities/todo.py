@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String, ForeignKey
-from context.database import Base
+from ..context.database import Base
 
 
 class Todo(Base):

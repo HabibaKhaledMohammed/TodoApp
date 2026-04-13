@@ -3,7 +3,7 @@ from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from jose import jwt
 from passlib.context import CryptContext
-from entities.user import User
+from ..entities.user import User
 
 password_context = CryptContext(schemes=["pbkdf2_sha256"], deprecated="auto")
 SECRET_KEY = "ab0f37f2add75c15dbfae3a27ef7935b4d838cd07fd351e3ad806c4fdd19e168"

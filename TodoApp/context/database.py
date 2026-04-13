@@ -24,8 +24,8 @@ def get_db():
 
 
 def init_db() -> None:
-    from entities.todo import Todo  # Ensure model metadata is registered before create_all.
-    from entities.user import User
+    from ..entities.todo import Todo  # Ensure model metadata is registered before create_all.
+    from ..entities.user import User
 
     Base.metadata.create_all(bind=engine)
 
