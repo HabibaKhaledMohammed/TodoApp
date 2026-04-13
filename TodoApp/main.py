@@ -5,6 +5,7 @@ from fastapi import FastAPI, Request
 from fastapi.responses import RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 from .context.database import init_db
 from .dependencies import db_dependency
@@ -14,6 +15,7 @@ from .services.auth_service import decode_access_token_from_cookie_or_none
 
 
 app = FastAPI()
+app.add_middleware(ProxyHeadersMiddleware)
 
 BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
