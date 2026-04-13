@@ -15,7 +15,7 @@ from .services.auth_service import decode_access_token_from_cookie_or_none
 
 
 app = FastAPI()
-app.add_middleware(ProxyHeadersMiddleware)
+app.add_middleware(ProxyHeadersMiddleware, trusted_hosts="*")
 
 BASE_DIR = Path(__file__).resolve().parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
