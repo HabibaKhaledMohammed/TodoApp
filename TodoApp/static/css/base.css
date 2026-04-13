@@ -1,0 +1,60 @@
+
+body {
+  min-height: 100vh;
+}
+
+.main-color {
+  background-color: #0e76a8 ;
+}
+
+/*
+ * Navbar dropdowns: BS4 disables Popper inside .navbar, so the menu must be position:absolute
+ * via .navbar-expand (see bootstrap.css). Extra rules + !important beat any stale cache/specificity.
+ */
+.navbar.main-color {
+  overflow: visible;
+}
+
+.navbar.main-color > .container {
+  overflow: visible;
+  flex-wrap: nowrap;
+}
+
+.navbar.main-color .nav-item.dropdown {
+  position: relative;
+}
+
+.navbar.main-color .navbar-nav .dropdown-menu {
+  position: absolute !important;
+  float: none !important;
+  top: 100%;
+  left: 0;
+  margin-top: 0.125rem;
+  z-index: 1050;
+}
+
+.strike-through-td {
+    text-decoration: line-through;
+}
+
+.auth-panel {
+  max-width: 30rem;
+  width: 100%;
+}
+
+code {
+  background: rgba(13, 110, 253, 0.08);
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* Navbar dropdown: point caret up while menu is open */
+.navbar .nav-item.dropdown .nav-link.dropdown-toggle::after {
+  transition: transform 0.2s ease;
+  transform-origin: center;
+  vertical-align: middle;
+}
+
+.navbar .nav-item.dropdown.show .nav-link.dropdown-toggle::after {
+  transform: rotate(180deg);
+}

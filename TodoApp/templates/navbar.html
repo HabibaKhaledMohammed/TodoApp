@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand navbar-dark main-color shadow-sm py-3">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center">
+        <div class="d-flex align-items-center flex-wrap">
+            <a class="navbar-brand font-weight-bold mb-0 mr-3 py-2" href="/">TodoApp</a>
+            <ul class="navbar-nav d-flex flex-row flex-wrap align-items-center mb-0">
+                <li class="nav-item">
+                    <a class="nav-link text-white px-3 py-2" href="/">Home</a>
+                </li>
+                {% if current_user %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white px-3 py-2" href="#" id="todosNavDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Todos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="todosNavDropdown">
+                        <a class="dropdown-item" href="/todos/todo-page">All todos</a>
+                        <a class="dropdown-item" href="/todos/add">Add todo</a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link text-white px-3 py-2" href="/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-white px-3 py-2" href="/register">Register</a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+        {% if current_user %}
+        <button type="button" class="btn btn-outline-light btn-sm my-1" id="navLogoutBtn">Log out</button>
+        {% endif %}
+    </div>
+</nav>

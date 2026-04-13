@@ -1,7 +1,7 @@
 from typing import Annotated
 from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
-from jose import jwt
+from jose import JWTError, jwt
 from passlib.context import CryptContext
 from ..entities.user import User
 
@@ -29,6 +29,16 @@ def create_access_token(user: User) -> str:
 
 def decode_token(token: str) -> dict:
     return jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+
+
+def decode_access_token_from_cookie_or_none(token: str | None) -> dict | None:
+    """Return JWT payload if valid; None if missing, invalid, or expired."""
+    if not token:
+        return None
+    try:
+        return decode_token(token)
+    except JWTError:
+        return None
 
 
 def get_current_user(token: Annotated[str, Depends(oauth2_bearer)]) -> dict:

@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="min-vh-100 py-5 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-7 col-xl-6">
+                <a class="d-inline-flex align-items-center link-secondary text-decoration-none small font-weight-bold mb-3" href="/todos/todo-page">
+                    <span class="mr-2 h5 mb-0" aria-hidden="true">←</span> Back to list
+                </a>
+
+                <div class="card shadow border-0 rounded-lg overflow-hidden">
+                    <div class="card-header bg-primary text-white py-4 px-4 border-0">
+                        <h1 class="h5 mb-1 font-weight-bold">Edit task</h1>
+                        <p class="small mb-0 text-white-50">Update details or remove this todo.</p>
+                    </div>
+                    <div class="card-body p-4 p-md-5 bg-white">
+                        <form id="editTodoForm">
+                            <div class="form-group">
+                                <label class="font-weight-bold text-muted small d-block" for="edit_title">Title</label>
+                                <input class="form-control form-control-lg" id="edit_title" name="title" type="text" required value="{{ todo.title | e }}">
+                            </div>
+                            <div class="form-group">
+                                <label class="font-weight-bold text-muted small d-block" for="edit_description">Description</label>
+                                <textarea class="form-control" id="edit_description" name="description" rows="4">{{ todo.description or '' }}</textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="font-weight-bold text-muted small d-block" for="edit_priority">Priority</label>
+                                    <select class="form-control" id="edit_priority" name="priority" required>
+                                        <option value="0" {% if todo.priority == 0 %}selected{% endif %}>Low</option>
+                                        <option value="1" {% if todo.priority == 1 %}selected{% endif %}>Normal</option>
+                                        <option value="2" {% if todo.priority == 2 %}selected{% endif %}>High</option>
+                                        <option value="3" {% if todo.priority == 3 %}selected{% endif %}>Urgent</option>
+                                        {% if todo.priority not in [0, 1, 2, 3] %}
+                                        <option value="{{ todo.priority }}" selected>Priority {{ todo.priority }}</option>
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-6 d-flex align-items-end">
+                                    <div class="form-check mb-2">
+                                        <input class="form-check-input" id="edit_complete" name="complete" type="checkbox" {% if todo.complete %}checked{% endif %}>
+                                        <label class="form-check-label" for="edit_complete">Completed</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-2">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center pt-2">
+                                <button class="btn btn-outline-danger order-1 order-md-2 mb-2 mb-md-0" type="button" data-todo-delete="{{ todo.id }}">Delete todo</button>
+                                <button class="btn btn-primary px-4 order-2 order-md-1" type="submit">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

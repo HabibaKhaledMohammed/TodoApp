@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="container   d-flex align-items-center">
+    <section class="card shadow-sm  w-75 border-0 mx-auto auth-panel">
+        <div class="card-body p-4 p-md-5 w-100">
+            <a class="link-secondary text-decoration-none small" href="/">Back Home</a>
+            <h1 class="h2 fw-bold mb-2">Create Account</h1>
+
+            <form id="registerForm" class="row g-3">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="email">Email</label>
+                    <input class="form-control" id="email" name="email" type="email" required>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-control" id="username" name="username" type="text" required>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="fullname">Full name</label>
+                    <input class="form-control" id="fullname" name="fullname" type="text" required>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="phone_number">Phone number</label>
+                    <input class="form-control" id="phone_number" name="phone_number" type="tel" autocomplete="tel">
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label" for="role">Role</label>
+                    <input class="form-control" id="role" name="role" type="text" required>
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" required autocomplete="new-password">
+                </div>
+
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="password2">Confirm password</label>
+                    <input class="form-control" id="password2" name="password2" type="password" required autocomplete="new-password">
+                </div>
+
+                <div class="col-12">
+                    <button class="btn btn-primary w-100 my-2" type="submit">Register</button>
+                </div>
+            </form>
+
+            <div id="register-message" class="alert alert-success mt-4 mb-0" hidden></div>
+            <div id="register-error" class="alert alert-danger mt-4 mb-0" hidden></div>
+
+            <p class="text-secondary mt-4 mb-0">
+                Already registered?
+                <a href="/login">Go to login</a>
+            </p>
+        </div>
+    </section>
+</main>
+{% endblock %}

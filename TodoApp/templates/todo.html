@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+{% set priority_labels = {0: 'Low', 1: 'Normal', 2: 'High', 3: 'Urgent'} %}
+<main class="py-4 bg-light min-vh-100">
+    <div class="container">
+        <header class="d-flex flex-wrap justify-content-between align-items-center pb-3 mb-4 border-bottom">
+            <div>
+                <p class="text-uppercase small text-muted font-weight-bold mb-1">Overview</p>
+                <h1 class="h3 mb-0 font-weight-bold text-dark">Your todos</h1>
+            </div>
+            <div class="d-flex flex-wrap align-items-center">
+                <a class="btn btn-primary btn-sm px-3 mb-2 mb-sm-0" href="/todos/add">Add todo</a>
+            </div>
+        </header>
+
+        <section class="card shadow-sm border-light rounded-lg" aria-labelledby="todo-list-heading">
+            <div class="card-header bg-white border-bottom py-3 px-4 d-flex justify-content-between align-items-center">
+                <h2 id="todo-list-heading" class="h6 mb-0 text-uppercase text-muted font-weight-bold small">Task list</h2>
+                <span class="badge badge-light border text-muted font-weight-normal">Server</span>
+            </div>
+            <div class="card-body p-4">
+                {% if todos %}
+                <div class="d-flex flex-column">
+                    {% for todo in todos %}
+                    <div class="card border-light shadow-sm mb-3">
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap justify-content-between align-items-start">
+                                <div class="flex-grow-1 pr-2 mb-2 mb-md-0">
+                                    <div class="font-weight-bold {% if todo.complete %}text-muted strike-through-td{% endif %}">{{ todo.title }}</div>
+                                    <div class="small text-muted">{{ todo.description or '' }}</div>
+                                    <div class="small mt-1">
+                                        {% if todo.priority in priority_labels %}{{ priority_labels[todo.priority] }}{% else %}Priority {{ todo.priority }}{% endif %}
+                                        {% if todo.complete %}
+                                        <span class="badge badge-success ml-2">Done</span>
+                                        {% else %}
+                                        <span class="badge badge-secondary ml-2">Open</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-shrink-0 align-items-center">
+                                    <a class="btn btn-sm btn-outline-primary mr-2" href="/todos/edit/{{ todo.id }}">Edit</a>
+                                    <button type="button" class="btn btn-sm btn-outline-danger" data-todo-delete="{{ todo.id }}">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% else %}
+                <p class="text-muted small mb-0">No todos yet. <a href="/todos/add">Add one</a>.</p>
+                {% endif %}
+            </div>
+        </section>
+    </div>
+</main>
+{% endblock %}

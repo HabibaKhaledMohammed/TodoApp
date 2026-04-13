@@ -1,18 +1,34 @@
-
 from fastapi import APIRouter, Path, HTTPException
+from sqlalchemy.orm import Session
+
 from ..dtos.todo_dto import TodoDto
 from ..entities.todo import Todo
 from ..dependencies import db_dependency, user_dependency
 
 router = APIRouter(prefix="/todos", tags=["todos"])
 
+
+def list_todos_for_user(db: Session, user: dict) -> list[Todo]:
+    """Same rules as GET /todos/: admins see all; others see only their todos."""
+    if user.get("role") == "admin":
+        return db.query(Todo).all()
+    return db.query(Todo).filter(Todo.owner_id == user.get("id")).all()
+
+
+def get_todo_for_user(db: Session, user: dict, todo_id: int) -> Todo | None:
+    """Load one todo: admins by id; others only if they own it."""
+    if user.get("role") == "admin":
+        return db.query(Todo).filter(Todo.id == todo_id).first()
+    return (
+        db.query(Todo)
+        .filter(Todo.id == todo_id, Todo.owner_id == user.get("id"))
+        .first()
+    )
+
+
 @router.get("/")
 async def read_all(db: db_dependency, user: user_dependency):
-    if user.get('role') != "admin":
-       return db.query(Todo).filter(Todo.owner_id == user.get("id")).all()
-    if user.get('role') == "admin":
-       return db.query(Todo).all()
-    raise HTTPException(status_code=401, detail="Authentication credentials were not provided")
+    return list_todos_for_user(db, user)
 
 
 @router.get("/{todo_id}", response_model=TodoDto)
@@ -21,7 +37,7 @@ def get_todo_by_id(
         user: user_dependency,
         todo_id: int = Path(gt=0)
 ):
-    todo = db.query(Todo).filter(Todo.id == todo_id, Todo.owner_id == user.get("id")).first()
+    todo = get_todo_for_user(db, user, todo_id)
     if todo is None:
         raise HTTPException(status_code=404, detail="Todo not found")
 

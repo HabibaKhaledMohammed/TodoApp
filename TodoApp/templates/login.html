@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="container   d-flex align-items-center">
+    <section class="card shadow-sm  w-50 border-0 mx-auto auth-panel">
+        <div class="card-body p-4 p-md-5 w-100">
+            <a class="link-secondary text-decoration-none small" href="/">Back Home</a>
+            <h1 class="h2 fw-bold mb-2">Login</h1>
+
+            <form id="loginForm" class="vstack gap-3">
+                <div>
+                    <label class="form-label" for="username">Username</label>
+                    <input class="form-control" id="username" name="username" type="text" required>
+                </div>
+
+                <div>
+                    <label class="form-label" for="password">Password</label>
+                    <input class="form-control" id="password" name="password" type="password" required>
+                </div>
+
+                <button class="btn btn-primary w-100 my-4" type="submit">Sign In</button>
+            </form>
+
+            <div id="login-message" class="alert alert-success mt-4 mb-0" hidden></div>
+            <div id="login-error" class="alert alert-danger mt-4 mb-0" hidden></div>
+
+            <p class="text-secondary mt-4 mb-0">
+                Need an account?
+                <a href="/register">Create one</a>
+            </p>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="min-vh-100 py-4 bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10 col-lg-7 col-xl-6">
+                <a class="d-inline-flex align-items-center link-secondary text-decoration-none small font-weight-bold mb-3" href="/todos/todo-page">
+                    <span class="mr-2 h5 mb-0" aria-hidden="true">←</span> Back to list
+                </a>
+
+                <div class="card shadow-sm border-light rounded-lg">
+                    <div class="card-header bg-white border-bottom py-3 px-4">
+                        <h1 class="h5 mb-0 font-weight-bold text-dark">Add new task</h1>
+                        <p class="small text-muted mb-0 mt-1">Create a todo and choose priority and status.</p>
+                    </div>
+                    <div class="card-body p-4">
+                        <form id="todoForm">
+                            <div class="form-group">
+                                <label class="small font-weight-bold text-muted d-block" for="todo_title">Title</label>
+                                <input class="form-control" id="todo_title" name="title" type="text" required placeholder="What needs doing?">
+                            </div>
+                            <div class="form-group">
+                                <label class="small font-weight-bold text-muted d-block" for="todo_description">Description</label>
+                                <textarea class="form-control" id="todo_description" name="description" rows="3" placeholder="Optional details"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="small font-weight-bold text-muted d-block" for="todo_priority">Priority</label>
+                                <select class="form-control" id="todo_priority" name="priority" required>
+                                    <option value="0">Low</option>
+                                    <option value="1" selected>Normal</option>
+                                    <option value="2">High</option>
+                                    <option value="3">Urgent</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="todo_complete" name="complete">
+                                    <label class="form-check-label" for="todo_complete">Mark as completed</label>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-block" type="submit">Create todo</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

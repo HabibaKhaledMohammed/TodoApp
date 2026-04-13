@@ -33,6 +33,7 @@ def create_user(user: UserCreateDto, db: db_dependency):
         fullname=str(user.fullname),
         hashed_password=password_context.hash(user.password),
         role=str(user.role),
+        phone_number=user.phone_number,
     )
     db.add(new_user)
     db.commit()

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+<main class="container py-5  d-flex align-items-center">
+    <section class="card shadow-sm border-0 mx-auto auth-panel">
+        <div class="card-body p-4 p-md-5 text-center">
+            <p class="text-uppercase small font-weight-bold text-muted mb-2">TodoApp</p>
+            <h1 class="h2 font-weight-bold mb-3">Welcome to Home</h1>
+            <p class="lead text-secondary mb-4">
+            Use the pages below to authenticate against the existing API endpoints.
+            </p>
+            <div class="d-flex flex-column flex-md-row justify-content-md-center align-items-center">
+                {% if current_user %}
+                <a class="btn btn-primary px-4" href="/todos/todo-page">Your todos</a>
+                {% else %}
+                <a class="btn btn-primary px-4 mr-md-2 mb-2 mb-md-0" href="/login">Login</a>
+                <a class="btn btn-outline-secondary px-4" href="/register">Register</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
